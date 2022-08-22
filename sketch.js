@@ -5,6 +5,7 @@ const BEATS_IN_BAR = 4;
 const BPM = 149;
 const secondsPerBar = (60 / BPM) * BEATS_IN_BAR;
 let beatDiameter = 0;
+let beatChange = false; 
 
 let BG_COLOR;
 let COLORS;
@@ -123,12 +124,14 @@ class Rune {
       latestBar <= this.maxActiveBarNum
     ) {
       fill(this.col);
+      beatChange = true; 
     } else {
       fill("white");
     }
     let [x, y] = this.getPos();
     drawSquare(x, y, this.size);
   }
+
 
   isActive(latest16thBeat) {
     return (
@@ -247,9 +250,9 @@ function drawPulsingBeats() {
 
   //only start pulsing when the song is playing
   // TODO: need to only activate this change when the beat changes
-  if (song.isPlaying()) {
+  if (song.isPlaying() && beatChange) {
     beatDiameter = Math.floor(Math.random() * 50)
-
+    beatChange = false; 
   }
   drawCircle(0, 0, 800 + beatDiameter);  
 }
