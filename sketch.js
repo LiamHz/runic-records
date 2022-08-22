@@ -155,6 +155,7 @@ function canvasPressed() {
 
 function preload() {
   song = loadSound("audio/girl-in-red--serotonin.mp3");
+  playButton = loadImage("images/play-button.png")
 }
 
 function setup() {
@@ -224,6 +225,7 @@ function draw() {
     maxPulseLength *
     (1 - ((pctBarCompletion % 0.5) / 0.5) ** 3)
   )
+
   drawCircle(0, 0, vinylDiamter + pulseLength)
 
   // Vinyl
@@ -253,7 +255,10 @@ function draw() {
   drawCircle(0, 0, 20);
 
   drawLabel();
-  pop()
+  pop();
+
+  imageMode(CENTER)
+  image(playButton, 500, 1000, 80, 80);
 }
 
 // Draws square from center instead of top left
@@ -316,6 +321,7 @@ function drawLabel() {
   // Make Y axis point down
   // scale(1, -1);
 
+
   strokeWeight(0);
   stroke("black");
   fill("white");
@@ -323,7 +329,7 @@ function drawLabel() {
   textSize(64);
   fill("black");
 
-  text("Serotonin", 0, 1110 / 2);
+  text("Serotonin", -150, 1110 / 2);
   textAlign(CENTER, CENTER);
 
   noFill();
