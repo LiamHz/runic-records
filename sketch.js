@@ -4,6 +4,7 @@ const canvasHeight = 1200;
 const BEATS_IN_BAR = 4;
 const BPM = 149;
 const secondsPerBar = (60 / BPM) * BEATS_IN_BAR;
+let beatDiameter = 0;
 
 let BG_COLOR;
 let COLORS;
@@ -205,6 +206,8 @@ function draw() {
   translate(width / 2, height / 2);
 
   noStroke();
+
+  drawPulsingBeats();
   drawVinyl();
 
   pctBarCompletion = (song.currentTime() % secondsPerBar) / secondsPerBar;
@@ -236,6 +239,22 @@ function draw() {
   drawLabel();
 }
 
+function drawPulsingBeats() {
+  maxDiameter = 50;
+  theta = 0;
+ 
+  drawingContext.shadowBlur = 4;
+  drawingContext.shadowColor = "white"; 
+  fill(255,255,200,40);
+
+  //only start pulsing when the song is playing
+  // TODO: need to only activate this change when the beat changes
+  if (song.isPlaying()) {
+    beatDiameter = Math.floor(Math.random() * 50)
+
+  }
+  drawCircle(0, 0, 800 + beatDiameter);  
+}
 // Draws square from center instead of top left
 // Coordinates (0, 0) will draw a square in the center of the canvas
 function drawSquare(x, y, size) {
