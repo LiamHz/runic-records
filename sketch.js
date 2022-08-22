@@ -235,8 +235,6 @@ function draw() {
   // Center
   fill("black");
   drawCircle(0, 0, 20);
-
-  drawLabel();
 }
 
 function drawPulsingBeats() {
