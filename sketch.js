@@ -13,7 +13,9 @@ let latestBar;
 let song;
 let midi;
 let runeSets = [];
-
+let doja = ["audio/say_so.mp3", "midi/say-so.mid"]
+let serotonin = ["audio/girl-in-red--serotonin.mp3", "midi/girl-in-red--serotonin.midi" ]
+let songURL = ["audio/girl-in-red--serotonin.mp3", "midi/girl-in-red--serotonin.midi" ]
 const chords = ["yellow", "blue", "red", "green"];
 
 const noteToColor = {
@@ -187,15 +189,38 @@ function canvasPressed() {
 }
 
 function preload() {
-  song = loadSound("audio/girl-in-red--serotonin.mp3");
-  Midi
-    .fromUrl("midi/girl-in-red--serotonin.midi")
-    .then(file => midi = file)
+  console.log(songURL); 
+  doja = createButton('doja');
+  doja.mousePressed(setDoja);
+  serotonin = createButton('serotonin');
+  serotonin.mousePressed(setSerotonin);
+  if (doja.mousePressed){
+    song = loadSound(doja[0]);
+    Midi
+      .fromUrl(doja[1])
+      .then(file => midi = file)
+  } else {
+    song = loadSound(serotonin[0]);
+    Midi
+      .fromUrl(serotonin[1])
+      .then(file => midi = file)
+  }
+ 
 
   gradient = loadImage('images/dream.png');
 }
 
+function setMidiSong(songURL, selectedSong) {
+  if(selectedSong =="doja"){
+    songURL = ["audio/say_so.mp3", "midi/say-so.mid"]
+    console.log(songURL)
+  } else if (selectedSong == "serotonin") {
+    midiSong = "midi/girl-in-red--serotonin.midi"
+  }
+}
+
 function setup() {
+  
   COLORS = {
     pink: color(241, 148, 148),
     yellow: color("yellow"),
@@ -223,6 +248,18 @@ function setup() {
   canvas.mousePressed(canvasPressed);
   frameRate(30);
   background(BG_COLOR);
+  
+
+}
+
+function setDoja(){
+  songURL = ["audio/say_so.mp3", "midi/say-so.mid"]
+  console.log('doja');
+  console.log(songURL);
+}
+function setSerotonin(){
+  songURL = ["audio/girl-in-red--serotonin.mp3", "midi/girl-in-red--serotonin.midi"]
+  console.log('serotonin');
 }
 
 function draw() {
